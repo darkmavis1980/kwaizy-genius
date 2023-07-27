@@ -10,8 +10,14 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connected', socket.id);
+
+  socket.on('message', (message) => {
+    const { action, payload } = JSON.parse(message);
+    console.log(action, payload);
+  });
 });
+
 
 server.listen(3000, () => {
   console.log('listening on *:3000');
