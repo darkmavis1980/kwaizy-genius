@@ -2,9 +2,15 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
+const { Server } = require('socket.io');
+const io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+});
 const { dispatcher } = require('./lib/actions');
+
+require('dotenv').config();
 
 app.get('/', (req, res) => {
   res.json({hello: 'world'});
@@ -13,9 +19,9 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
-  socket.on('message', (message) => {
+  socket.on('message', async (message) => {
     const data = JSON.parse(message);
-    dispatcher(socket, data);
+    await dispatcher(socket, data);
   });
 });
 
