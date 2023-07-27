@@ -1,32 +1,58 @@
 import player from './modules/player.js'
 import User from './modules/user.js'
-
 const users = []
 const socket = io('ws://localhost:3000')
+const getIndex = id => {
+  return users.findIndex(user => user.id === id)
+}
 
-socket.on('connect', () => {
-    const { id } = socket;
-    const user = new User(id)
-    users.push({id, instance: user})
-    // socket.emit('message', JSON.stringify({
-    //     action: 'setName',
-    //     payload: {
-    //         name: 'Denis'
-    //     }
-    // }))
-})
-
-socket.on('message', async (message) => {
-    const { action, payload } = message;
-    const { id } = socket;
-    const user = new User(socket.id)
-
-    if (action === 'playersList') {
-        payload.forEach(eachPlayer => {
-            const [ playerId, playerData] = eachPlayer;
-            if (playerId === id) {
-                console.log(payload)
-            }
-        });
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
     }
-});
+}, false);
+
+// socket.on('connect', () => {
+//     const { id } = socket;
+//     const user = new User(id)
+//     users.push({id, instance: user})
+//     // socket.emit('message', JSON.stringify({
+//     //     action: 'setName',
+//     //     payload: {
+//     //         name: 'Denis'
+//     //     }
+//     // }))
+// })
+
+// socket.on('message', async (message) => {
+//     const { action, payload } = message;
+//     const { id } = socket;
+//     const user = new User(socket.id)
+
+//     if (action === 'playersList') {
+//         payload.forEach(eachPlayer => {
+//             const [ playerId, playerData] = eachPlayer;
+//             if (playerId === id) {
+//                 console.log(payload)
+//             }
+//         });
+//     }
+// });
+
+
+socket.emit('user-connected', onlineUsers => {
+  onlineUsers.forEach(user => users.push({
+    id: user.id,
+    instance: new User(user.id)
+  }))
+})
+socket.on('user-connected', id => {
+  if (id === socket.id) return
+  const user = new User(id)
+  users.push({id, instance: user})
+})
+socket.on('user-disconnected', id => {
+  document.querySelector(`[data-id="${id}"]`).remove()
+  const index = getIndex(id)
+  users.splice(1, index)
+})
