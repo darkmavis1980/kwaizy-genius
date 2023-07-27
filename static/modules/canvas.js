@@ -2,9 +2,11 @@ class Canvas {
   constructor() {
     this.element = document.querySelector('#map')
   }
+
   add(node) {
     this.element.appendChild(node)
   }
+
   create(type, props) {
     const node = document.createElement(type)
     Object.entries(props).forEach(([attr, value]) => {
@@ -18,4 +20,5 @@ class Canvas {
   }
 }
 const canvas = new Canvas()
+
 export default canvas

@@ -99,3 +99,7 @@ button:focus-visible {
   background: #FFF;
   content: "";
 }
+
+.player {
+  background: cyan;
+}
