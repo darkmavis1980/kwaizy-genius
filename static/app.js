@@ -1,20 +1,29 @@
 
 import player from './modules/player.js';
 import User from './modules/user.js';
+import { eventDispatcher } from './modules/event.js';
+import { getCurrentChatName, emitName } from "./modules/utils.js";
+
 const users = [];
 const socket = io('ws://localhost:3000');
+window.socket = socket;
 
 const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
+const chatLoginForm = document.getElementById('chat-login-form');
+const chatForm = document.getElementById('chat-form');
 
 const getIndex = id => users.findIndex(user => user.id === id);
 
-
 window.addEventListener("keydown", function(e) {
-    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+    if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
         e.preventDefault();
     }
 }, false);
+
+socket.on('message', message => {
+  eventDispatcher(socket, message);
+});
 
 // socket.on('connect', () => {
 //     const { id } = socket;
@@ -62,7 +71,38 @@ socket.on('user-disconnected', id => {
   const index = getIndex(id)
   users.splice(1, index)
 });
-const getCurrentChatName = () => localStorage.getItem('name') || undefined;
+
+chatForm.onsubmit = (e) => {
+  e.preventDefault();
+  const questionField = document.getElementById('question');
+  const { value } = questionField;
+  if (value.trim() !== '') {
+    const questionObj = {
+      action: 'chatMessage',
+      payload: value,
+    };
+
+    socket.emit('message', JSON.stringify(questionObj));
+
+    const geniusRequest = {
+      action: 'askGenius',
+      payload: value,
+    };
+    socket.emit('message', JSON.stringify(geniusRequest));
+  }
+
+  questionField.value = '';
+}
+
+chatLoginForm.onsubmit = (e) => {
+  e.preventDefault();
+  const nameField = document.getElementById('name');
+  const { value } = nameField;
+  localStorage.setItem('name', value);
+  emitName(socket, value);
+  chatLogin.style.display = 'none';
+  chatWindow.style.display = 'block';
+}
 
 const init = () => {
   const name = getCurrentChatName();
@@ -70,33 +110,12 @@ const init = () => {
   if (name) {
     chatLogin.style.display = 'none';
     chatWindow.style.display = 'block';
-    emitName(name);
+    emitName(socket, name);
     return;
   }
 
   chatLogin.style.display = 'block';
   chatWindow.style.display = 'none';
 };
-
-const emitName = (value) => {
-  const data = {
-    action: 'setName',
-    payload: {
-      name: value,
-    }
-  }
-  socket.emit('message', JSON.stringify(data));
-}
-
-const chatLoginForm = document.getElementById('chat-login-form');
-chatLoginForm.onsubmit = (e) => {
-  e.preventDefault();
-  const nameField = document.getElementById('name');
-  const { value } = nameField;
-  localStorage.setItem('name', value);
-  emitName(value);
-  chatLogin.style.display = 'none';
-  chatWindow.style.display = 'block';
-}
 
 init();
