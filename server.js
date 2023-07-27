@@ -13,27 +13,52 @@ const { dispatcher } = require('./lib/actions');
 const port = process.env.PORT || 3000
 const path = require('path');
 
+require('dotenv').config();
+
 app.use(cors());
 app.use(
-  express.static( path.join(__dirname, '/static') )
-)
-
-require('dotenv').config();
+  express.static(path.join(__dirname, '/static'))
+);
 
 app.get('/', (req, res) => {
   res.json({hello: 'world'});
 });
 
+// Hold the list of players in memory
+const players = new Map();
+
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
+
+  players.set(socket.id, {
+    id: socket.id,
+  });
+
+  console.log('Active players', players);
 
   socket.on('message', async (message) => {
     const data = JSON.parse(message);
     await dispatcher(socket, data);
   });
 
-  socket.on('disconnect', function() {
-    console.log('user disconnected');
+  socket.on('disconnect', async () => {
+    console.log('user disconnected', socket.id);
+
+    players.delete(socket.id);
+
+    console.log('Active players', players);
+
+    socket.emit('message', {
+      action: 'playersList',
+      payload: players,
+    });
+
+    socket.emit('message', {
+      action: 'userDisconnected',
+      payload: {
+        id: socket.id,
+      }
+    })
   });
 });
 
