@@ -30,6 +30,8 @@ const players = new Map();
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
+  socket.players = players;
+
   players.set(socket.id, {
     id: socket.id,
   });
