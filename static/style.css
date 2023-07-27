@@ -81,8 +81,8 @@ button:focus-visible {
 }
 
 #map {
-  height: calc(20*32px);
-  width: calc(35*32px);
+  height: calc(10*64px);
+  width: calc(17*64px);
   content: ""; /* make canvas visible at all times */
   background-color: #505050;
   margin: 0 auto;
