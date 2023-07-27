@@ -34,6 +34,11 @@ io.on('connection', (socket) => {
     id: socket.id,
   });
 
+  socket.emit('message', {
+    action: 'playersList',
+    payload: Array.from(players),
+  });
+
   console.log('Active players', players);
 
   socket.on('message', async (message) => {
@@ -50,7 +55,7 @@ io.on('connection', (socket) => {
 
     socket.emit('message', {
       action: 'playersList',
-      payload: players,
+      payload: Array.from(players),
     });
 
     socket.emit('message', {
