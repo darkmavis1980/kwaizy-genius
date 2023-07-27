@@ -99,13 +99,13 @@ button:focus-visible {
   content: "";
 }
 
-.chat {
-  max-width: 300px;
-  border: 1px solid gray;
+.chat-container {
   height: calc(20*32px);
 }
 
-.chat-container {
+.chat {
+  max-width: 300px;
+  border: 1px solid gray;
   height: calc(20*32px);
 }
 
@@ -114,24 +114,38 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   overflow: scroll;
-}
-
-dl {
   margin-top: auto;
 }
 
-dt {
+.chat-window ul {
+  list-style: none;
+  padding: 0;
+}
+
+.chat-message {
+  padding: 1rem;
+  max-width: 80%;
+
+  &:not(last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.question {
+  text-align: right;
+  margin-left: auto;
+  background-color: blue;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px 0 0 10px;
+}
+
+.answer {
   text-align: left;
   background-color: lightgray;
   padding: 1rem;
   margin-right: 10%;
-}
-
-dd {
-  text-align: right;
-  background-color: blue;
-  color: white;
-  padding: 1rem;
+  border-radius: 0 10px 10px 0;
 }
 
 .chat-input-form {
