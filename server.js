@@ -62,6 +62,16 @@ io.on('connection', (socket) => {
   });
 });
 
+app.get('/players', (req, res) => {
+  res
+    .status(200)
+    .json({
+      players: Array.from(players),
+    })
+    .end();
+});
+
+
 
 server.listen(port, () => {
   console.log('listening on *: ', port);
