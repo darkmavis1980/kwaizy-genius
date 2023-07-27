@@ -4,10 +4,10 @@ import User from './modules/user.js';
 import { eventDispatcher } from './modules/event.js';
 import { getCurrentChatName, emitName } from "./modules/utils.js";
 
-window.socket = socket;
-
 const users = [];
 const socket = io('ws://localhost:3000');
+
+window.socket = socket;
 
 const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
