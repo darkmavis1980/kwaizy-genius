@@ -18,7 +18,8 @@ class Canvas {
     this.add(node)
     return node
   }
-}
-const canvas = new Canvas()
+};
 
-export default canvas
+const canvas = new Canvas();
+
+export default canvas;

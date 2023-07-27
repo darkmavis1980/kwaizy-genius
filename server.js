@@ -46,8 +46,6 @@ io.on('connection', (socket) => {
     payload: Array.from(players),
   });
 
-  // console.log('Active players', players);
-
   socket.on('message', async (message) => {
     const data = JSON.parse(message);
     await dispatcher(io, socket, data);
@@ -57,6 +55,13 @@ io.on('connection', (socket) => {
     cb(users)
     users.push({id: socket.id})
     io.emit('user-connected', socket.id)
+  })
+
+  socket.on('user-move', coordinates => {
+    console.log('user move')
+    const index = getIndex(socket.id)
+    users[index].coordinates = coordinates
+    io.emit('user-move', {id: socket.id, coordinates})
   })
 
   socket.on('disconnect', async () => {

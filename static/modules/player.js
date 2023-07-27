@@ -8,7 +8,12 @@ class Player extends User {
     this.initMovement()
   }
 
+  set(key, value) {
+    this[key] = value
+  }
+
   initMovement() {
+    const keycodes = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
     window.addEventListener('keydown', event => {
       // console.log(event)
       if (event.key === "ArrowUp") { // up
@@ -22,6 +27,9 @@ class Player extends User {
       }
       if (event.key === "ArrowRight") { // right
         this.move('x', 1)
+      }
+      if (keycodes.includes(event.key)) {
+        this.socket.emit('user-move', this.coordinates)
       }
     })
   }
