@@ -50,10 +50,11 @@ io.on('connection', (socket) => {
 
   socket.on('message', async (message) => {
     const data = JSON.parse(message);
-    await dispatcher(socket, data);
+    await dispatcher(io, socket, data);
   });
 
-  socket.on('user-connected', () => {
+  socket.on('user-connected', cb => {
+    cb(users)
     users.push({id: socket.id})
     io.emit('user-connected', socket.id)
   })

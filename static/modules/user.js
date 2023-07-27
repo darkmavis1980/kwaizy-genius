@@ -1,4 +1,5 @@
 import canvas from './canvas.js'
+
 class User {
   constructor(id) {
     if (id) {
@@ -7,15 +8,15 @@ class User {
             'data-id': id
         })
     }
-    this.element = canvas.create('div', {'class': 'user'})
+    // this.element = canvas.create('div', {'class': 'user'})
     this.coordinates = {
       x: 0,
       y: 0,
     }
 
     this.maxCoordinates = {
-        x: (canvas.clientWidth / 32 - 1) / 2,
-        y: (canvas.clientHeight / 32 - 1) / 2
+        x: (canvas.element.clientWidth / 32 - 1) / 2,
+        y: (canvas.element.clientHeight / 32 - 1) / 2
     }
   }
 

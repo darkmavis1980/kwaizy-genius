@@ -12,29 +12,51 @@
       <div class="game-container">
         <canvas id="map" class="map" width="1088" height="640"></canvas>
         <div id="chat" class="chat">
-          <div class="chat-window">
-          <dl>
-            <dt>Welcome to Kwaizy Genius. Please ask your questions:</dt>
-            <dd>How do I do this?</dd>
-            <dt>Test answer</dt>
-            <dd>Another question</dd>
-            <dt>Welcome to Kwaizy Genius. Please ask your questions:</dt>
-            <dd>How do I do this?</dd>
-            <dt>Test answer</dt>
-            <dd>Another question</dd>
-            <dt>Welcome to Kwaizy Genius. Please ask your questions:</dt>
-            <dd>How do I do this?</dd>
-            <dt>Test answer</dt>
-            <dd>Another question</dd>
-          </dl>
-          </div>
-          <div class="chat-input-form">
-            <form class="chat-form">
-              <label class="chat-label">
-                  <input type="text" class="chat-input" placeholder="Type a message">
-              </label>
-              <input type="submit" class="chat-submit" value="↳">
+          <div class="chat-login" id="chat-login">
+            <form id="chat-login-form">
+              <input type="text" id="name" name="name" placeholder="Enter a name..." />
+              <button type="submit">
+                Enter name
+              </button>
             </form>
+          </div>
+          <div class="chat-container" id="chat-container">
+            <div class="chat-window" id="chat-window">
+              <ul id="chat-log">
+                <!-- <li class="chat-message question">
+                  <span>From: User</span>
+                  <p>This is a question</p>
+                </li>
+                <li class="chat-message answer">
+                  <span>From: Genius</span>
+                  <p>This is an answer</p>
+                </li>
+                <li class="chat-message question">
+                  <span>From: User</span>
+                  <p>This is a question</p>
+                </li>
+                <li class="chat-message answer">
+                  <span>From: Genius</span>
+                  <p>This is an answer</p>
+                </li>
+                <li class="chat-message question">
+                  <span>From: User</span>
+                  <p>This is a question</p>
+                </li>
+                <li class="chat-message answer">
+                  <span>From: Genius</span>
+                  <p>This is an answer</p>
+                </li> -->
+              </ul>
+            </div>
+            <div class="chat-input-form">
+              <form class="chat-form" id="chat-form">
+                <label class="chat-label">
+                  <input type="text" id="question" name="question" class="chat-input" placeholder="Type a message">
+                </label>
+                <input type="submit" class="chat-submit" value="↳">
+              </form>
+            </div>
           </div>
         </div>
       </div>
