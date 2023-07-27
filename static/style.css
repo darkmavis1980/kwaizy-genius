@@ -105,6 +105,10 @@ button:focus-visible {
   height: calc(20*32px);
 }
 
+.chat-container {
+  height: calc(20*32px);
+}
+
 .chat-window {
   height: calc(100% - 60px);
   display: flex;
