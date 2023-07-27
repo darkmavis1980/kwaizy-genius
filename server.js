@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
 
   socket.on('message', async (message) => {
     const data = JSON.parse(message);
-    await dispatcher(socket, data);
+    await dispatcher(io, socket, data);
   });
 
   socket.on('user-connected', cb => {

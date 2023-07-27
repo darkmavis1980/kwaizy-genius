@@ -10,7 +10,7 @@ class Player extends User {
 
   initMovement() {
     window.addEventListener('keydown', event => {
-      console.log(event)
+      // console.log(event)
       if (event.key === "ArrowUp") { // up
         this.move('y', -1)
       }
