@@ -145,3 +145,6 @@ dd {
   margin-right: 0.5rem;
   border: none;
 }
+.player {
+  background: cyan;
+}

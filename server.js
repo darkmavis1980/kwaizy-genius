@@ -27,6 +27,11 @@ app.get('/', (req, res) => {
 // Hold the list of players in memory
 const players = new Map();
 
+const users = []
+const getIndex = id => {
+  return users.findIndex(user => user.id === id)
+}
+
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
@@ -48,12 +53,14 @@ io.on('connection', (socket) => {
     await dispatcher(socket, data);
   });
 
+  socket.on('user-connected', () => {
+    users.push({id: socket.id})
+    io.emit('user-connected', socket.id)
+  })
+
   socket.on('disconnect', async () => {
     console.log('user disconnected', socket.id);
-
     players.delete(socket.id);
-
-    // console.log('Active players', players);
 
     socket.emit('message', {
       action: 'playersList',
@@ -66,6 +73,10 @@ io.on('connection', (socket) => {
         id: socket.id,
       }
     })
+
+    const index = getIndex(socket.id)
+    users.splice(1, index)
+    io.emit('user-disconnected', socket.id)
   });
 });
 
