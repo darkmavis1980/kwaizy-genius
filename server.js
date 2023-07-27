@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
     payload: Array.from(players),
   });
 
-  console.log('Active players', players);
+  // console.log('Active players', players);
 
   socket.on('message', async (message) => {
     const data = JSON.parse(message);
@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
 
     players.delete(socket.id);
 
-    console.log('Active players', players);
+    // console.log('Active players', players);
 
     socket.emit('message', {
       action: 'playersList',
