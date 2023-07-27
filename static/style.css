@@ -44,8 +44,7 @@ h1 {
 
 .game-container {
   width: 100%;
-  background-color: red;
-  display: grid;
+  display: flex;
 }
 
 
@@ -100,6 +99,52 @@ button:focus-visible {
   content: "";
 }
 
+.chat {
+  max-width: 300px;
+  border: 1px solid gray;
+  height: calc(20*32px);
+}
+
+.chat-window {
+  height: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+dl {
+  margin-top: auto;
+}
+
+dt {
+  text-align: left;
+  background-color: lightgray;
+  padding: 1rem;
+  margin-right: 10%;
+}
+
+dd {
+  text-align: right;
+  background-color: blue;
+  color: white;
+  padding: 1rem;
+}
+
+.chat-input-form {
+  height: 60px;
+}
+
+.chat-form {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid gray;
+  padding: 1rem;
+}
+
+.chat-input {
+  margin-right: 0.5rem;
+  border: none;
+}
 .player {
   background: cyan;
 }
