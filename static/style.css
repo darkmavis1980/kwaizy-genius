@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #213547;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,7 +18,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #747bff;
   text-decoration: inherit;
 }
 a:hover {
@@ -49,7 +49,6 @@ h1 {
   display: flex;
 }
 
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -57,7 +56,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -69,22 +68,9 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 .map-container {
-  height: calc(10*64px);
-  width: calc(17*64px);
+  height: calc(10 * 64px);
+  width: calc(17 * 64px);
   position: relative;
 }
 
@@ -144,13 +130,18 @@ button:focus-visible {
 }
 
 .chat-container {
-  height: calc(20*var(--cell-size));
+  height: calc(20 * 32px);
+  font-family: VT323;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .chat {
-  max-width: 300px;
-  border: 1px solid gray;
-  height: calc(20*var(--cell-size));
+  width: 250px;
+  height: 640px;
+  background-color: #101141;
 }
 
 .chat-window {
@@ -164,33 +155,41 @@ button:focus-visible {
 
 .chat-window ul {
   list-style: none;
-  padding: 0;
+  padding: 0 12px;
 }
 
 .chat-message {
-  padding: 1rem;
-  max-width: 80%;
+  text-align: left;
+}
 
-  &:not(last-child) {
-    margin-bottom: 0.5rem;
-  }
+.username {
+  background-color: #663300;
+  color: #FFF8E1;
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
 .question {
-  text-align: right;
-  margin-left: auto;
-  background-color: blue;
-  color: white;
-  padding: 1rem;
-  border-radius: 10px 0 0 10px;
+  padding: 12px;
+  max-width: 80%;
+  border-radius: 6px;
+  margin: 0 0 0 auto;
+  background-color: #f2673a;
+}
+
+.genius {
+  background-color: #794681;
+  color: #F7F7F8;
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
 .answer {
-  text-align: left;
-  background-color: lightgray;
-  padding: 1rem;
-  margin-right: 10%;
-  border-radius: 0 10px 10px 0;
+  padding: 12px;
+  max-width: 80%;
+  border-radius: 6px;
+  margin: 0 auto 0 0;
+  background-color: #fde8af;
 }
 
 .chat-input-form {
@@ -199,9 +198,10 @@ button:focus-visible {
 
 .chat-form {
   display: flex;
-  justify-content: space-between;
-  border-top: 1px solid gray;
-  padding: 1rem;
+}
+
+.chat-label {
+  background-color: #ffecb3;
 }
 
 .chat-form.player-ask-genie {
@@ -209,8 +209,18 @@ button:focus-visible {
 }
 
 .chat-input {
-  margin-right: 0.5rem;
-  border: none;
+  all: unset;
+  text-align: left;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+
+  &::placeholder {
+    color: #FFB21A;
+  }
+}
+
+.chat-button {
+  background-color: #F2673A;
+  border-radius: 0;
 }
 
 .player {
@@ -225,4 +235,3 @@ button:focus-visible {
   background-image: url("images/Male\ 18-1.png");
   background-position: 64px 0;
 }
-
