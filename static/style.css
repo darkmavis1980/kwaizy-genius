@@ -12,6 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  text-align: left;
 
   --cell-size: 32px;
 }
@@ -41,12 +42,12 @@ h1 {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 .game-container {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: calc(17 * 64px) 1fr;
 }
 
 button {
@@ -273,4 +274,24 @@ button:focus-visible {
 
 .chat-login button {
   color: black;
+}
+
+.active-players {
+  display: block;
+  padding-top: 1rem;
+}
+
+.players-list {
+  list-style-type: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.players-list li {
+  display: inline;
+  margin: 0 0.25rem;
+  padding: 0.25rem;
+  border-radius: 5px;
+  background-color: rgb(220 220 220 / 0.5);
 }
