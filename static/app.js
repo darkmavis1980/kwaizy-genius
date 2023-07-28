@@ -2,11 +2,10 @@
 import player from './modules/player.js';
 import User from './modules/user.js';
 import { eventDispatcher } from './modules/event.js';
-import { getCurrentChatName, emitName } from "./modules/utils.js";
+import { getCurrentChatName, emitName, emitPosition } from "./modules/utils.js";
 
 const users = [];
 const socket = io();
-
 window.socket = socket;
 document.getElementById('map').addEventListener('keydown', function (e) {
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) > -1) {
@@ -52,12 +51,21 @@ socket.on('user-disconnected', id => {
 });
 
 socket.on('user-move', user => {
+  console.log('client user-move')
+  emitPosition(socket, user.coordinates);
   const index = getIndex(user.id);
   if (users[index]) {
     const instance = users[index].instance;
     instance.setPosition(user.coordinates);
   }
 });
+
+const questionObj = {
+  action: 'chatMessage',
+  payload: value,
+};
+
+socket.emit('message', JSON.stringify(questionObj));
 
 chatForm.onsubmit = (e) => {
   e.preventDefault();
