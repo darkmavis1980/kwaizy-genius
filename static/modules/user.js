@@ -3,28 +3,28 @@ import canvas from './canvas.js'
 class User {
   constructor(id) {
     if (id) {
-        this.element = canvas.create('div', {
-            'class': 'user',
-            'data-id': id
-        })
+      this.element = canvas.create('div', {
+        'class': 'user',
+        'data-id': id,
+      })
     }
-    // this.element = canvas.create('div', {'class': 'user'})
+
     this.coordinates = {
       x: 0,
       y: 0,
     }
 
     this.maxCoordinates = {
-        x: (canvas.element.clientWidth / 32 - 1) / 2,
-        y: (canvas.element.clientHeight / 32 - 1) / 2
+      x: (canvas.element.clientWidth / 32 - 1) / 2,
+      y: (canvas.element.clientHeight / 32 - 1) / 2
     }
   }
 
   isMoveAllowed(axis, direction) {
     return this.coordinates[axis] + direction
-        <= this.maxCoordinates[axis]
-        && this.coordinates[axis] + direction
-        >= this.maxCoordinates[axis] * -1
+      <= this.maxCoordinates[axis]
+      && this.coordinates[axis] + direction
+      >= this.maxCoordinates[axis] * -1
   }
 
   move(axis, direction) {
@@ -35,12 +35,12 @@ class User {
     const y = axis === 'y'
       ? this.coordinates.y + direction
       : this.coordinates.y
-    this.setPosition({x, y})
+    this.setPosition({ x, y })
   }
 
-  setPosition({x, y}) {
-    this.element.style =  `transform: translate(${x * 32}px, ${y * 32}px);`
-    this.coordinates = {x, y}
+  setPosition({ x, y }) {
+    this.element.style = `transform: translate(${x * 32}px, ${y * 32}px);`;
+    this.coordinates = { x, y };
   }
 }
 export default User
