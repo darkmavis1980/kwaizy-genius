@@ -71,6 +71,7 @@ socket.on('user-disconnected', id => {
 socket.on('user-move', user => {
   console.log('client user-move')
   emitPosition(socket, user.coordinates);
+  // TODO remove code bellow
   const index = getIndex(user.id);
   if (users[index]) {
     const instance = users[index].instance;
@@ -113,10 +114,12 @@ chatLoginForm.onsubmit = (e) => {
   e.preventDefault();
   const nameField = document.getElementById('name');
   const { value } = nameField;
-  localStorage.setItem('name', value);
-  emitName(socket, value);
-  chatLogin.style.display = 'none';
-  chatWindow.style.display = 'block';
+  if (value !== '') {
+    localStorage.setItem('name', value);
+    emitName(socket, value);
+    chatLogin.style.display = 'none';
+    chatWindow.style.display = 'block';
+  }
 }
 
 const init = () => {

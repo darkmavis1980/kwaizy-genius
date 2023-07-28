@@ -16,17 +16,22 @@ class Player extends User {
   initMovement() {
     const keycodes = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
     window.addEventListener('keydown', event => {
+      const rndInt = Math.floor(Math.random() * 3) + 1
       if (event.key === 'ArrowUp') { // up
         this.move('y', -1);
+        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 32px`;
       }
       if (event.key === 'ArrowDown') { // down
         this.move('y', 1);
+        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 0px`;
       }
       if (event.key === 'ArrowLeft') { // left
         this.move('x', -1);
+        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 96px`;
       }
       if (event.key === 'ArrowRight') { // right
         this.move('x', 1);
+        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 64px`;
       }
       if (keycodes.includes(event.key)) {
         // console.log(this.element.offsetLeft, this.element.offsetTop);
