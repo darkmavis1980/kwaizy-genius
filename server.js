@@ -64,6 +64,7 @@ io.on('connection', (socket) => {
       if (users[index]) {
         users[index].coordinates = coordinates;
         io.emit('user-move', {id: socket.id, coordinates});
+        // NEW CODE
         socket.emit('message', {
           action: 'userMove',
           payload: {

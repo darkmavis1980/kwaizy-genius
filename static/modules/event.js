@@ -27,7 +27,7 @@ export const eventDispatcher = (socket, message) => {
 
   const eventsMap = {
     playersList: () => {
-      console.log('player list', payload);
+      console.log('client player list', payload);
     },
     geniusReply: () => {
       const { message: { message: { content }}, userName} = payload;

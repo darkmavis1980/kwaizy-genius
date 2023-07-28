@@ -71,6 +71,7 @@ socket.on('user-disconnected', id => {
 socket.on('user-move', user => {
   console.log('client user-move')
   emitPosition(socket, user.coordinates);
+  // TODO remove code bellow
   const index = getIndex(user.id);
   if (users[index]) {
     const instance = users[index].instance;
