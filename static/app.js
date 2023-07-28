@@ -14,6 +14,7 @@ document.getElementById('map').addEventListener('keydown', function (e) {
   }
 }, false);
 
+const gameOverlay = document.getElementById('game-overlay');
 const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
 const chatLoginForm = document.getElementById('chat-login-form');
@@ -127,16 +128,20 @@ chatLoginForm.onsubmit = (e) => {
   }
 }
 
+gameOverlay.addEventListener('click', () => {
+  gameOverlay.classList.remove('active');
+})
+
 const init = () => {
   const name = getCurrentChatName();
 
-  if (name) {
+  if (name || true) {
     chatLogin.style.display = 'none';
     chatWindow.style.display = 'block';
     emitName(socket, name);
     return;
   }
-
+  gameOverlay.classList.add('active');
   chatLogin.style.display = 'block';
   chatWindow.style.display = 'none';
 };
