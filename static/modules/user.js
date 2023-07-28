@@ -8,6 +8,9 @@ class User {
     y: 0,
   }
 
+  skin =  Math.floor(Math.random() * 42) + 1;
+  skinStyle = `background-image: url("images/chars/char-${this.skin}.png");`
+
   genieHitCollision = false;
 
   constructor(id) {
@@ -15,13 +18,14 @@ class User {
       this.element = canvas.create('div', {
         'class': 'user',
         'data-id': id,
+        'style': this.skinStyle
       })
-    }
+    };
 
     this.coordinates = {
       x: 0,
       y: 0,
-    }
+    };
 
     this.maxCoordinates = {
       x: (canvas.element.clientWidth / BLOCK_SIZE - 1) / 2,
@@ -36,7 +40,18 @@ class User {
       >= this.maxCoordinates[axis] * -1
   }
 
-  move(axis, direction) {
+  getCharDirection(direction) {
+    const rndInt = Math.floor(Math.random() * 3) + 1;
+    const directions = {
+      ArrowUp: `calc(32px * ${rndInt}) 32px`,
+      ArrowDown: `calc(32px * ${rndInt}) 0px`,
+      ArrowLeft: `calc(32px * ${rndInt}) 96px`,
+      ArrowRight: `calc(32px * ${rndInt}) 64px`
+    };
+    return directions[direction];
+  }
+
+  move(axis, direction, arrowDirection) {
     if (!this.isMoveAllowed(axis, direction)) return
     const x = axis === 'x'
       ? this.coordinates.x + direction
@@ -44,7 +59,7 @@ class User {
     const y = axis === 'y'
       ? this.coordinates.y + direction
       : this.coordinates.y
-    this.setPosition({ x, y })
+    this.setPosition({ x, y }, this.getCharDirection(arrowDirection));
   }
 
   getGenieArea() {
@@ -74,8 +89,8 @@ class User {
     }
   }
 
-  setPosition({ x, y }) {
-    this.element.style = `transform: translate(${x * BLOCK_SIZE}px, ${y * BLOCK_SIZE}px);`;
+  setPosition({ x, y }, newDirection = 'background-position: 64px 0') {
+    this.element.style = `transform: translate(${x * BLOCK_SIZE}px, ${y * BLOCK_SIZE}px); background-position: ${newDirection}; background-image: url("images/chars/char-${this.skin}.png");`;
     this.coordinates = { x, y };
     this.absCoordinates = {
       x: this.element.offsetLeft + (x * BLOCK_SIZE),

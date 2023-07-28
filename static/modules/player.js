@@ -16,25 +16,19 @@ class Player extends User {
   initMovement() {
     const keycodes = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
     window.addEventListener('keydown', event => {
-      const rndInt = Math.floor(Math.random() * 3) + 1
       if (event.key === 'ArrowUp') { // up
-        this.move('y', -1);
-        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 32px`;
+        this.move('y', -1, event.key);
       }
       if (event.key === 'ArrowDown') { // down
-        this.move('y', 1);
-        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 0px`;
+        this.move('y', 1, event.key);
       }
       if (event.key === 'ArrowLeft') { // left
-        this.move('x', -1);
-        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 96px`;
+        this.move('x', -1, event.key);
       }
       if (event.key === 'ArrowRight') { // right
-        this.move('x', 1);
-        this.element.style.backgroundPosition = `calc(32px * ${rndInt}) 64px`;
+        this.move('x', 1, event.key);
       }
       if (keycodes.includes(event.key)) {
-        // console.log(this.element.offsetLeft, this.element.offsetTop);
         this.socket.emit('user-move', this.coordinates)
         if (this.moveHandler) {
           this.moveHandler();
