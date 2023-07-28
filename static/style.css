@@ -122,8 +122,8 @@ button:focus-visible {
   height: calc(2 * var(--cell-size));
   position: absolute;
   border-radius: 50%;
-  top: 1rem;
-  left: 34.5%;
+  top: 4rem;
+  left: 33.75%;
 }
 
 .user {
