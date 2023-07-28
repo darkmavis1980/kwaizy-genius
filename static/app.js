@@ -17,8 +17,26 @@ const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
 const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
+const questionField = document.getElementById('question');
+const regexGeniusQuestion = /\/genius\s.+/gm;
 
-player.set('socket', socket)
+player.set('socket', socket);
+
+player.setMoveHandler(() => {
+  let { value } = questionField;
+  if (player.genieHitCollision) {
+    chatForm.classList.add('player-ask-genie');
+    if (!regexGeniusQuestion.test(value) && value === '') {
+      questionField.value = `/genius ${value}`;
+    }
+  }
+
+  if (!player.genieHitCollision) {
+    chatForm.classList.remove('player-ask-genie');
+    questionField.value = value.replace('/genius', '').trim();
+  }
+});
+
 const getIndex = id => users.findIndex(user => user.id === id);
 socket.on('message', message => {
   eventDispatcher(socket, message);
@@ -60,22 +78,13 @@ socket.on('user-move', user => {
   }
 });
 
-const questionObj = {
-  action: 'chatMessage',
-  payload: value,
-};
-
-socket.emit('message', JSON.stringify(questionObj));
-
 chatForm.onsubmit = (e) => {
   e.preventDefault();
-  const regex = /\/genius\s.+/gm;
 
-  const questionField = document.getElementById('question');
   let { value } = questionField;
   if (value.trim() !== '') {
     let askToGenius = false;
-    if (regex.test(value)) {
+    if (regexGeniusQuestion.test(value)) {
       askToGenius = true;
       console.log('asking to genius');
       value = value.replace(/\/genius\s/gm, '');
