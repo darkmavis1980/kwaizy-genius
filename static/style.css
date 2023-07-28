@@ -235,3 +235,21 @@ button:focus-visible {
   background-image: url("images/Male\ 18-1.png");
   background-position: 64px 0;
 }
+
+.chat-login {
+  padding: 5rem 0;
+}
+
+.chat-login input[type="text"] {
+  margin-bottom: 1rem;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem;
+  width: 80%;
+}
+
+.chat-login button {
+  color: black;
+}
