@@ -35,7 +35,7 @@ const getIndex = id => {
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
-  socket.players = players;
+  io.players = players;
 
   players.set(socket.id, {
     id: socket.id,

@@ -6,22 +6,18 @@ Install the dependencies:
 
 ```sh
 npm install
-cd server
-npm install
 ```
 
-## Client
+## Run the app
 
-To run the client:
+Run it in development mode:
 
 ```sh
 npm run dev
 ```
 
-## Server
-
-To run the server:
+Just run it without listening for changes:
 
 ```sh
-npm run dev
+npm run start
 ```
