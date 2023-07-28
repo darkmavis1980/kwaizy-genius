@@ -1,6 +1,7 @@
 
 import player from './modules/player.js';
 import User from './modules/user.js';
+import canvas from './modules/canvas.js';
 import { eventDispatcher } from './modules/event.js';
 import { getCurrentChatName, emitName, emitPosition } from "./modules/utils.js";
 
@@ -18,6 +19,11 @@ const chatWindow = document.getElementById('chat-container');
 const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
 const questionField = document.getElementById('question');
+const genieContainer = document.getElementById('genie-container');
+const genie = canvas.create('div', {
+  class: 'genie'
+});
+genieContainer.appendChild(genie);
 
 player.set('socket', socket);
 
