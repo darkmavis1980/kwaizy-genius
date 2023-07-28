@@ -122,8 +122,13 @@ button:focus-visible {
   display: block;
   width: calc(6 * var(--cell-size));
   height: calc(3 * var(--cell-size));
-  background-color: white;
+  background-color: rgb(255 255 255 / .3);
+  border-radius: 5px;
   color: black;
+}
+
+.genie-container .genie {
+  background-color: red;
 }
 
 .user {
@@ -197,6 +202,10 @@ button:focus-visible {
   justify-content: space-between;
   border-top: 1px solid gray;
   padding: 1rem;
+}
+
+.chat-form.player-ask-genie {
+  background-color: rgb(255 0 0 / .2);
 }
 
 .chat-input {
