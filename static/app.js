@@ -59,9 +59,18 @@ socket.on('user-move', user => {
 
 chatForm.onsubmit = (e) => {
   e.preventDefault();
+  const regex = /\/genius\s.+/gm;
+
   const questionField = document.getElementById('question');
-  const { value } = questionField;
+  let { value } = questionField;
   if (value.trim() !== '') {
+    let askToGenius = false;
+    if (regex.test(value)) {
+      askToGenius = true;
+      console.log('asking to genius');
+      value = value.replace(/\/genius\s/gm, '');
+    }
+
     const questionObj = {
       action: 'chatMessage',
       payload: value,
@@ -69,11 +78,13 @@ chatForm.onsubmit = (e) => {
 
     socket.emit('message', JSON.stringify(questionObj));
 
-    const geniusRequest = {
-      action: 'askGenius',
-      payload: value,
-    };
-    socket.emit('message', JSON.stringify(geniusRequest));
+    if (askToGenius) {
+      const geniusRequest = {
+        action: 'askGenius',
+        payload: value,
+      };
+      socket.emit('message', JSON.stringify(geniusRequest));
+    }
   }
 
   questionField.value = '';

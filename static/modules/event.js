@@ -1,15 +1,18 @@
 const chatLog = document.getElementById('chat-log');
 
-const createChatMessage = (message, type = 'question') => {
+const CHAT_DIRECTION = 'UP';
+
+const createChatMessage = (payload, type = 'question') => {
   const msg = document.createElement('li');
   msg.classList.add('chat-message', type);
   const span = document.createElement('span');
-  span.textContent = 'From:';
+  span.textContent = `From: ${payload.userName}`;
   msg.appendChild(span);
   const paragraph = document.createElement('p');
-  paragraph.textContent = message;
+  paragraph.textContent = payload.message;
   msg.appendChild(paragraph);
-  chatLog.append(msg);
+  const injectMethod = CHAT_DIRECTION === 'UP' ? 'prepend' : 'append';
+  chatLog[injectMethod](msg);
 }
 
 export const eventDispatcher = (socket, message) => {
@@ -21,8 +24,11 @@ export const eventDispatcher = (socket, message) => {
       console.log('player list', payload);
     },
     geniusReply: () => {
-      const { message: { content }} = payload;
-      createChatMessage(content, 'answer');
+      const { message: { message: { content }}, userName} = payload;
+      createChatMessage({
+        message: content,
+        userName,
+      }, 'answer');
     },
     chatMessage: () => {
       console.log('message', payload);
