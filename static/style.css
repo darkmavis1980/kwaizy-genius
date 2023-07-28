@@ -115,13 +115,14 @@ button:focus-visible {
 .genie-container .genie {
   background-color: red;
   background-image: url('images/genius.png');
-  background-position: 64px 0;
-  width: var(--cell-size);
-  height: var(--cell-size);
+  background-position: 60px 0;
+  background-size: 168px;
+  width: calc(2 * var(--cell-size));
+  height: calc(2 * var(--cell-size));
   position: absolute;
   border-radius: 50%;
   top: 1rem;
-  left: 40.5%;
+  left: 34.5%;
 }
 
 .user {
