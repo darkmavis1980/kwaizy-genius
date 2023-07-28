@@ -77,7 +77,7 @@ const MapHandler = {
     this.tileAtlas = Loader.getImage('tiles');
   },
   drawLayer(layer) {
-    console.log(this);
+    // console.log(this);
     for (let c = 0; c < mapConfig.cols; c++) {
       for (let r = 0; r < mapConfig.rows; r++) {
         let tile = mapConfig.getTile(layer, c, r);
