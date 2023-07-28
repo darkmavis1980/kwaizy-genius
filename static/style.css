@@ -246,7 +246,6 @@ button:focus-visible {
   width: calc(96px / 3);
   height: calc(128px / 4);
   display: inline-block;
-  background-image: url("images/Male\ 18-1.png");
   background-position: 64px 0;
 }
 
