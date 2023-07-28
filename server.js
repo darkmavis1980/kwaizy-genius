@@ -95,8 +95,6 @@ app.get('/players', (req, res) => {
     .end();
 });
 
-
-
 server.listen(port, () => {
   console.log('listening on *: ', port);
 });

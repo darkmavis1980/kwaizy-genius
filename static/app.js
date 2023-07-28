@@ -5,9 +5,14 @@ import { eventDispatcher } from './modules/event.js';
 import { getCurrentChatName, emitName } from "./modules/utils.js";
 
 const users = [];
-const socket = io('ws://localhost:3000');
+const socket = io();
 
 window.socket = socket;
+window.addEventListener("keydown", function (e) {
+  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+      e.preventDefault();
+  }
+}, false);
 
 const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
@@ -15,15 +20,7 @@ const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
 
 player.set('socket', socket)
-
 const getIndex = id => users.findIndex(user => user.id === id);
-
-window.addEventListener("keydown", function (e) {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
-        e.preventDefault();
-    }
-}, false);
-
 socket.on('message', message => {
   eventDispatcher(socket, message);
 });
@@ -48,16 +45,16 @@ socket.on('user-connected', id => {
 socket.on('user-disconnected', id => {
     document.querySelector(`[data-id="${id}"]`).remove();
     const index = getIndex(id);
-    users.splice(1, index);
+    users.splice(index, 1);
 });
 
 socket.on('user-move', user => {
     const index = getIndex(user.id);
     console.log(users);
-    // if (users[index]) {
+    if (users[index]) {
         const instance = users[index].instance;
         instance.setPosition(user.coordinates);
-    // }
+    }
 });
 
 chatForm.onsubmit = (e) => {

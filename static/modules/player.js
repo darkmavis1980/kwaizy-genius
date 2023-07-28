@@ -15,7 +15,6 @@ class Player extends User {
   initMovement() {
     const keycodes = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
     window.addEventListener('keydown', event => {
-      // console.log(event)
       if (event.key === "ArrowUp") { // up
         this.move('y', -1)
       }
