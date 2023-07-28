@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     id: socket.id,
   });
 
-  socket.emit('message', {
+  io.emit('message', {
     action: 'playersList',
     payload: Array.from(players),
   });
@@ -76,12 +76,12 @@ io.on('connection', (socket) => {
     console.log('user disconnected', socket.id);
     players.delete(socket.id);
 
-    socket.emit('message', {
+    io.emit('message', {
       action: 'playersList',
       payload: Array.from(players),
     });
 
-    socket.emit('message', {
+    io.emit('message', {
       action: 'userDisconnected',
       payload: {
         id: socket.id,

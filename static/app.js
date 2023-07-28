@@ -20,12 +20,14 @@ const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
 const questionField = document.getElementById('question');
 const genieContainer = document.getElementById('genie-container');
+
 const genie = canvas.create('div', {
   class: 'genie'
 });
 genieContainer.appendChild(genie);
 
 player.set('socket', socket);
+
 
 player.setMoveHandler(() => {
   let { value } = questionField;

@@ -1,6 +1,13 @@
 const chatLog = document.getElementById('chat-log');
+const playersList = document.getElementById('players-list');
 
 const CHAT_DIRECTION = 'UP';
+
+const removeAllChildNodes = (parent) => {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
 
 const createChatMessage = (payload, type = 'question') => {
   const msg = document.createElement('li');
@@ -27,7 +34,17 @@ export const eventDispatcher = (socket, message) => {
 
   const eventsMap = {
     playersList: () => {
-      console.log('client player list', payload);
+      // console.log('client player list', payload);
+      removeAllChildNodes(playersList);
+      console.log('list of players', payload);
+      payload.forEach(([playerId, playerData]) => {
+        if (playerData.name) {
+          const playerTag = document.createElement('li');
+          playerTag.id = `player-${playerId}`;
+          playerTag.textContent = playerData.name;
+          playersList.append(playerTag);
+        }
+      });
     },
     geniusReply: () => {
       const { message: { message: { content }}, userName} = payload;
