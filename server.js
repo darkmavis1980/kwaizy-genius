@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
 
   players.set(socket.id, {
     id: socket.id,
+    skin: 0
   });
 
   io.emit('message', {

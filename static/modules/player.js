@@ -7,7 +7,6 @@ class Player extends User {
     this.element = canvas.create('div', { 'class': ['player', 'user', 'char'], id: 'current-player' });
     this.initMovement();
     this.moveHandler = undefined;
-    console.log(this.skin)
   }
 
   set(key, value) {

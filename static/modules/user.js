@@ -9,7 +9,7 @@ class User {
   }
 
   skin =  Math.floor(Math.random() * 42) + 1;
-  skinStyle = `background-image: url("images/chars/char-${this.skin}.png");`
+  // skinStyle = `background-image: url("images/chars/char-${this.skin}.png");`
 
   genieHitCollision = false;
 
@@ -18,7 +18,7 @@ class User {
       this.element = canvas.create('div', {
         'class': 'user',
         'data-id': id,
-        'style': this.skinStyle
+        // 'style': this.skinStyle
       })
     };
 

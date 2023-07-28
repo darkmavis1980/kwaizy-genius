@@ -134,7 +134,7 @@ button:focus-visible {
   height: var(--cell-size);
   border-radius: 50%;
   z-index: 2;
-  background: #FFF;
+  /* background: #FFF; */
   content: "";
 }
 
@@ -247,7 +247,7 @@ button:focus-visible {
 }
 
 .player {
-  background: cyan;
+  /* background: cyan; */
   z-index: 1000;
 }
 

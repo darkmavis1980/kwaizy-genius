@@ -3,7 +3,7 @@ import player from './modules/player.js';
 import User from './modules/user.js';
 import canvas from './modules/canvas.js';
 import { eventDispatcher } from './modules/event.js';
-import { getCurrentChatName, emitName, emitPosition } from "./modules/utils.js";
+import { getCurrentChatName, emitName, emitPosition, emitSkin } from "./modules/utils.js";
 
 const users = [];
 const socket = io();
@@ -49,22 +49,24 @@ socket.on('message', message => {
 
 socket.emit('user-connected', onlineUsers => {
   onlineUsers.forEach(user => {
+    console.log('Client emit user-connected', socket.id)
     const id = user.id
+    if (id === socket.id) return;
     const instance = new User(id)
-    instance.setPosition(user.coordinates)
-    users.push({
-        id, instance
-    });
+    emitSkin(socket, instance.skin)
+    users.push({id, instance});
   });
 });
 
 socket.on('user-connected', id => {
+  console.log('Client ON user-connected')
   if (id === socket.id) return;
   const user = new User(id);
   users.push({ id, instance: user });
 });
 
 socket.on('user-disconnected', id => {
+  console.log('Client user-disconnected')
   const user = document.querySelector(`[data-id="${id}"]`)
   if (user) {
     user.remove();
@@ -75,11 +77,11 @@ socket.on('user-disconnected', id => {
 
 socket.on('user-move', user => {
   console.log('client user-move')
-  emitPosition(socket, user.coordinates);
-  // TODO remove code bellow
   const index = getIndex(user.id);
   if (users[index]) {
     const instance = users[index].instance;
+    emitPosition(socket, user.coordinates);
+    emitSkin(socket, user.skin)
     instance.setPosition(user.coordinates);
   }
 });
