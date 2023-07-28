@@ -103,12 +103,13 @@ button:focus-visible {
 
 .genie-container {
   position: absolute;
-  top: calc(1 * var(--cell-size));
-  left: calc(14 * var(--cell-size));
+  /* top: calc(1 * var(--cell-size)); */
+  top: 0;
+  left: calc(13.25 * var(--cell-size));
   display: block;
-  width: calc(6 * var(--cell-size));
-  height: calc(3 * var(--cell-size));
-  background-color: rgb(255 255 255 / .3);
+  width: calc(8 * var(--cell-size));
+  height: calc(6 * var(--cell-size));
+  /* background-color: rgb(255 255 255 / .3); */
   border-radius: 5px;
   color: black;
 }
