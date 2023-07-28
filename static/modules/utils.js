@@ -9,3 +9,13 @@ export const emitName = (socket, value) => {
   }
   socket.emit('message', JSON.stringify(data));
 };
+
+export const emitPosition = (socket, coodinates) => {
+  const data = {
+    action: 'setPosition',
+    payload: {
+      coodinates
+    }
+  }
+  socket.emit('message', JSON.stringify(data));
+};
