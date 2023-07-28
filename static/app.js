@@ -37,24 +37,27 @@ socket.emit('user-connected', onlineUsers => {
 });
 
 socket.on('user-connected', id => {
-    if (id === socket.id) return;
-    const user = new User(id);
-    users.push({ id, instance: user });
+  if (id === socket.id) return;
+  const user = new User(id);
+  users.push({ id, instance: user });
 });
 
 socket.on('user-disconnected', id => {
-    document.querySelector(`[data-id="${id}"]`).remove();
-    const index = getIndex(id);
-    users.splice(index, 1);
+  const user = document.querySelector(`[data-id="${id}"]`)
+  if (user) {
+    user.remove();
+  }
+  const index = getIndex(id);
+  users.splice(index, 1);
 });
 
 socket.on('user-move', user => {
-    const index = getIndex(user.id);
-    console.log(users);
-    if (users[index]) {
-        const instance = users[index].instance;
-        instance.setPosition(user.coordinates);
-    }
+  const index = getIndex(user.id);
+  console.log(users);
+  if (users[index]) {
+    const instance = users[index].instance;
+    instance.setPosition(user.coordinates);
+  }
 });
 
 chatForm.onsubmit = (e) => {
