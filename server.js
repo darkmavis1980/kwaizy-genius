@@ -20,10 +20,6 @@ app.use(
   express.static(path.join(__dirname, '/static'))
 );
 
-app.get('/', (req, res) => {
-  res.json({hello: 'world'});
-});
-
 // Hold the list of players in memory
 const players = new Map();
 

@@ -230,6 +230,7 @@ button:focus-visible {
 .chat-input {
   all: unset;
   margin: 0.5rem 0 0.5rem 0.5rem;
+  text-align: left;
 
   &::placeholder {
     color: #FFB21A;
