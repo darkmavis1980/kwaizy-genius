@@ -8,8 +8,8 @@ const users = [];
 const socket = io();
 
 window.socket = socket;
-window.addEventListener("keydown", function (e) {
-  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+document.getElementById('map').addEventListener('keydown', function (e) {
+  if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) > -1) {
       e.preventDefault();
   }
 }, false);
