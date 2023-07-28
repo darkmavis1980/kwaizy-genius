@@ -3,35 +3,43 @@ import User from './user.js'
 
 class Player extends User {
   constructor() {
-    super()
-    this.element = canvas.create('div', { 'class': ['player', 'user', 'char'], id: 'current-player' })
-    this.initMovement()
+    super();
+    this.element = canvas.create('div', { 'class': ['player', 'user', 'char'], id: 'current-player' });
+    this.initMovement();
+    this.moveHandler = undefined;
   }
 
   set(key, value) {
-    this[key] = value
+    this[key] = value;
   }
 
   initMovement() {
-    const keycodes = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
+    const keycodes = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
     window.addEventListener('keydown', event => {
-      if (event.key === "ArrowUp") { // up
+      if (event.key === 'ArrowUp') { // up
         this.move('y', -1)
       }
-      if (event.key === "ArrowDown") { // down
+      if (event.key === 'ArrowDown') { // down
         this.move('y', 1)
       }
-      if (event.key === "ArrowLeft") { // left
+      if (event.key === 'ArrowLeft') { // left
         this.move('x', -1)
       }
-      if (event.key === "ArrowRight") { // right
+      if (event.key === 'ArrowRight') { // right
         this.move('x', 1)
       }
       if (keycodes.includes(event.key)) {
         // console.log(this.element.offsetLeft, this.element.offsetTop);
         this.socket.emit('user-move', this.coordinates)
+        if (this.moveHandler) {
+          this.moveHandler();
+        }
       }
     });
+  }
+
+  setMoveHandler(moveHandler) {
+    this.moveHandler = moveHandler;
   }
 }
 
