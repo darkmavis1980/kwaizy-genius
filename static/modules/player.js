@@ -4,7 +4,7 @@ import User from './user.js'
 class Player extends User {
   constructor() {
     super()
-    this.element = canvas.create('div', {'class': ['player', 'user']})
+    this.element = canvas.create('div', { 'class': ['player', 'user', 'char'] })
     this.initMovement()
   }
 
