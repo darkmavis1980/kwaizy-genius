@@ -14,6 +14,7 @@ document.getElementById('map').addEventListener('keydown', function (e) {
   }
 }, false);
 
+const gameOverlay = document.getElementById('game-overlay');
 const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
 const chatLoginForm = document.getElementById('chat-login-form');
@@ -111,7 +112,6 @@ chatForm.onsubmit = (e) => {
       socket.emit('message', JSON.stringify(geniusRequest));
     }
   }
-
   questionField.value = '';
 }
 
@@ -122,8 +122,7 @@ chatLoginForm.onsubmit = (e) => {
   if (value !== '') {
     localStorage.setItem('name', value);
     emitName(socket, value);
-    chatLogin.style.display = 'none';
-    chatWindow.style.display = 'block';
+    gameOverlay.classList.remove('active');
   }
 }
 
@@ -131,14 +130,10 @@ const init = () => {
   const name = getCurrentChatName();
 
   if (name) {
-    chatLogin.style.display = 'none';
-    chatWindow.style.display = 'block';
     emitName(socket, name);
     return;
   }
-
-  chatLogin.style.display = 'block';
-  chatWindow.style.display = 'none';
+  gameOverlay.classList.add('active');
 };
 
 init();
