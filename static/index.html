@@ -23,17 +23,7 @@
           </div>
         </div>
         <div id="chat" class="chat">
-          <div class="chat-login" id="chat-login">
-            <form id="chat-login-form">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter a name..."
-              />
-              <button type="submit">Enter name</button>
-            </form>
-          </div>
+          
           <div class="chat-container" id="chat-container">
             <div class="chat-window" id="chat-window">
              <ul id="chat-log">
@@ -72,7 +62,67 @@
         </div>
       </div>
     </div>
-    <div class="overlay active" id="game-overlay"></div>
+    <div class="overlay" id="game-overlay">
+      <div class="overlay-heading-wrapper">
+        <p class="overlay-heading-text">Welcome to Kwaizy Genius</p>
+      </div>
+      <div class="overlay-content">
+        <div class="overlay-image-wrapper">
+          <img class="overlay-image" src="images/overlay_troll.png">
+        </div>
+        <div class="overlay-form">
+          <div class="chat-window" id="chat-window">
+            <ul id="chat-log">
+              <li class="chat-message">
+                <p class="genius">Genius</p>
+                <p class="answer">Welcome to Kwaizy Genius. Please ask your question.</p>
+              </li>
+              <li class="chat-message">
+                <p class="username">Player</p>
+                <p class="question">How do I start?</p>
+              </li>
+              <li class="chat-message">
+                <p class="genius">Genius</p>
+                <p class="answer">Enter your name below to get started.</p>
+              </li>
+            </ul>
+            <div class="chat-form" id="chat-login">
+              <form class="chat-form" id="chat-login-form">
+                <div class="chat-label">
+                  <label class="chat-label">
+                    <input
+                      class="chat-input"
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Enter a name..."
+                    />
+                  </label>
+                </div>
+                <button class="chat-button btn btn-success" type="submit">
+                  <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M21.1578 0.22237L2.56822 11.8153C1.76822 12.313 1.81942 13.0295 2.68102 13.406L7.08742 15.3294L17.4818 5.42557C18.8586 4.13006 19.0506 4.30735 17.9082 5.82081L8.25382 18.2148V23.1415C8.25382 24.0946 8.75462 24.2833 9.36662 23.5603L13.8402 18.2782L18.8946 20.4846C19.7562 20.8611 20.5378 20.3927 20.6314 19.4445L22.441 1.0405C22.5354 0.092249 21.957 -0.276155 21.1578 0.22237Z"
+                      fill="#F7E016"
+                    />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="overlay-content-bg">
+        </div>
+      </div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js" type="module"></script>
     <script src="modules/map.js"></script>

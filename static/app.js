@@ -112,7 +112,6 @@ chatForm.onsubmit = (e) => {
       socket.emit('message', JSON.stringify(geniusRequest));
     }
   }
-
   questionField.value = '';
 }
 
@@ -123,27 +122,18 @@ chatLoginForm.onsubmit = (e) => {
   if (value !== '') {
     localStorage.setItem('name', value);
     emitName(socket, value);
-    chatLogin.style.display = 'none';
-    chatWindow.style.display = 'block';
+    gameOverlay.classList.remove('active');
   }
 }
-
-gameOverlay.addEventListener('click', () => {
-  gameOverlay.classList.remove('active');
-})
 
 const init = () => {
   const name = getCurrentChatName();
 
-  if (name || true) {
-    chatLogin.style.display = 'none';
-    chatWindow.style.display = 'block';
+  if (name) {
     emitName(socket, name);
     return;
   }
   gameOverlay.classList.add('active');
-  chatLogin.style.display = 'block';
-  chatWindow.style.display = 'none';
 };
 
 init();
