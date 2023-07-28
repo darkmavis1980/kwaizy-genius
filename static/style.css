@@ -103,18 +103,26 @@ button:focus-visible {
 
 .genie-container {
   position: absolute;
-  top: calc(1 * var(--cell-size));
-  left: calc(14 * var(--cell-size));
+  top: 0;
+  left: calc(13.25 * var(--cell-size));
   display: block;
-  width: calc(6 * var(--cell-size));
-  height: calc(3 * var(--cell-size));
-  background-color: rgb(255 255 255 / .3);
+  width: calc(8 * var(--cell-size));
+  height: calc(6 * var(--cell-size));
   border-radius: 5px;
   color: black;
 }
 
 .genie-container .genie {
   background-color: red;
+  background-image: url('images/genius.png');
+  background-position: 60px 0;
+  background-size: 168px;
+  width: calc(2 * var(--cell-size));
+  height: calc(2 * var(--cell-size));
+  position: absolute;
+  border-radius: 50%;
+  top: 1rem;
+  left: 34.5%;
 }
 
 .user {

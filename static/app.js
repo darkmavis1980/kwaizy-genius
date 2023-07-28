@@ -1,6 +1,7 @@
 
 import player from './modules/player.js';
 import User from './modules/user.js';
+import canvas from './modules/canvas.js';
 import { eventDispatcher } from './modules/event.js';
 import { getCurrentChatName, emitName, emitPosition } from "./modules/utils.js";
 
@@ -18,7 +19,11 @@ const chatWindow = document.getElementById('chat-container');
 const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
 const questionField = document.getElementById('question');
-const regexGeniusQuestion = /\/genius\s.+/gm;
+const genieContainer = document.getElementById('genie-container');
+const genie = canvas.create('div', {
+  class: 'genie'
+});
+genieContainer.appendChild(genie);
 
 player.set('socket', socket);
 
@@ -26,14 +31,12 @@ player.setMoveHandler(() => {
   let { value } = questionField;
   if (player.genieHitCollision) {
     chatForm.classList.add('player-ask-genie');
-    if (!regexGeniusQuestion.test(value) && value === '') {
-      questionField.value = `/genius ${value}`;
-    }
+    chatForm.querySelector('#question').setAttribute('placeholder', 'Chat with genie');
   }
 
   if (!player.genieHitCollision) {
     chatForm.classList.remove('player-ask-genie');
-    questionField.value = value.replace('/genius', '').trim();
+    chatForm.querySelector('#question').setAttribute('placeholder', 'Chat with players');
   }
 });
 
@@ -81,14 +84,12 @@ socket.on('user-move', user => {
 
 chatForm.onsubmit = (e) => {
   e.preventDefault();
-
   let { value } = questionField;
   if (value.trim() !== '') {
     let askToGenius = false;
-    if (regexGeniusQuestion.test(value)) {
+    if (e.target.classList.contains('player-ask-genie')) {
       askToGenius = true;
       console.log('asking to genius');
-      value = value.replace(/\/genius\s/gm, '');
     }
 
     const questionObj = {
