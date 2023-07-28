@@ -78,13 +78,6 @@ socket.on('user-move', user => {
   }
 });
 
-const questionObj = {
-  action: 'chatMessage',
-  payload: value,
-};
-
-socket.emit('message', JSON.stringify(questionObj));
-
 chatForm.onsubmit = (e) => {
   e.preventDefault();
 
