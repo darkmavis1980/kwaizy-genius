@@ -12,6 +12,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --cell-size: 32px;
 }
 
 a {
@@ -26,7 +28,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  min-width: 320px;
+  min-width: calc(10 * var(--cell-size));
   min-height: 100vh;
 }
 
@@ -113,25 +115,37 @@ button:focus-visible {
   z-index: 1;
 }
 
+.genie-container {
+  position: absolute;
+  top: calc(1 * var(--cell-size));
+  left: calc(14 * var(--cell-size));
+  display: block;
+  width: calc(6 * var(--cell-size));
+  height: calc(3 * var(--cell-size));
+  background-color: white;
+  color: black;
+}
+
 .user {
   position: absolute;
-  top: calc(10 * 32px); /* position player in center of canvas */
-  left: calc(17 * 32px); /* position player in center of canvas */
-  width: 32px;
-  height: 32px;
+  top: calc(10 * var(--cell-size)); /* position player in center of canvas */
+  left: calc(17 * var(--cell-size)); /* position player in center of canvas */
+  width: var(--cell-size);
+  height: var(--cell-size);
   border-radius: 50%;
+  z-index: 2;
   background: #FFF;
   content: "";
 }
 
 .chat-container {
-  height: calc(20*32px);
+  height: calc(20*var(--cell-size));
 }
 
 .chat {
   max-width: 300px;
   border: 1px solid gray;
-  height: calc(20*32px);
+  height: calc(20*var(--cell-size));
 }
 
 .chat-window {
@@ -192,6 +206,7 @@ button:focus-visible {
 
 .player {
   background: cyan;
+  z-index: 1000;
 }
 
 .char {

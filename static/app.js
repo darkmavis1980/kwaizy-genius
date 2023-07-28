@@ -53,7 +53,6 @@ socket.on('user-disconnected', id => {
 
 socket.on('user-move', user => {
   const index = getIndex(user.id);
-  console.log(users);
   if (users[index]) {
     const instance = users[index].instance;
     instance.setPosition(user.coordinates);
