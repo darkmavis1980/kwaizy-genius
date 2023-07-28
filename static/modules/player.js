@@ -17,16 +17,16 @@ class Player extends User {
     const keycodes = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
     window.addEventListener('keydown', event => {
       if (event.key === 'ArrowUp') { // up
-        this.move('y', -1);
+        this.move('y', -1, event.key);
       }
       if (event.key === 'ArrowDown') { // down
-        this.move('y', 1);
+        this.move('y', 1, event.key);
       }
       if (event.key === 'ArrowLeft') { // left
-        this.move('x', -1);
+        this.move('x', -1, event.key);
       }
       if (event.key === 'ArrowRight') { // right
-        this.move('x', 1);
+        this.move('x', 1, event.key);
       }
       if (keycodes.includes(event.key)) {
         // console.log(this.element.offsetLeft, this.element.offsetTop);

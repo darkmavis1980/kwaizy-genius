@@ -36,15 +36,25 @@ class User {
       >= this.maxCoordinates[axis] * -1
   }
 
-  move(axis, direction) {
-    if (!this.isMoveAllowed(axis, direction)) return
+  getCharDirection(direction) {
+    const directions = {
+      ArrowUp: 'background-position: 64px -97px',
+      ArrowDown: 'background-position: 64px 0',
+      ArrowLeft: 'background-position: 64px -33px',
+      ArrowRight: 'background-position: 64px -65px'
+    }
+    return directions[direction];
+  }
+
+  move(axis, direction, arrowDirection) {
+    if (!this.isMoveAllowed(axis, direction)) return;
     const x = axis === 'x'
       ? this.coordinates.x + direction
       : this.coordinates.x
     const y = axis === 'y'
       ? this.coordinates.y + direction
       : this.coordinates.y
-    this.setPosition({ x, y })
+    this.setPosition({ x, y }, this.getCharDirection(arrowDirection));
   }
 
   getGenieArea() {
@@ -74,8 +84,8 @@ class User {
     }
   }
 
-  setPosition({ x, y }) {
-    this.element.style = `transform: translate(${x * BLOCK_SIZE}px, ${y * BLOCK_SIZE}px);`;
+  setPosition({ x, y }, newDirection = 'background-position: 64px 0') {
+    this.element.style = `transform: translate(${x * BLOCK_SIZE}px, ${y * BLOCK_SIZE}px); ${newDirection}`;
     this.coordinates = { x, y };
     this.absCoordinates = {
       x: this.element.offsetLeft + (x * BLOCK_SIZE),
