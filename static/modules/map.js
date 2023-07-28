@@ -1,8 +1,8 @@
-var Loader = {
+const Loader = {
   images: {},
   loadImage(key, src) {
-    var img = new Image();
-    var d = new Promise(function (resolve, reject) {
+    const img = new Image();
+    const d = new Promise(function (resolve, reject) {
         img.onload = function () {
             this.images[key] = img;
             resolve(img);
@@ -20,7 +20,7 @@ var Loader = {
   }
 };
 
-var mapConfig = {
+const mapConfig = {
   cols: 17,
   rows: 10,
   tsize: 64,
@@ -56,12 +56,12 @@ var mapConfig = {
 // Map object
 //
 
-var Map = {
+const MapHandler = {
   run(context) {
     this.ctx = context;
     this._previousElapsed = 0;
 
-    var p = this.load();
+    const p = this.load();
     Promise.all(p).then(function (loaded) {
         this.init();
         // window.requestAnimationFrame(this.tick);
@@ -78,9 +78,9 @@ var Map = {
   },
   drawLayer(layer) {
     console.log(this);
-    for (var c = 0; c < mapConfig.cols; c++) {
-      for (var r = 0; r < mapConfig.rows; r++) {
-        var tile = mapConfig.getTile(layer, c, r);
+    for (let c = 0; c < mapConfig.cols; c++) {
+      for (let r = 0; r < mapConfig.rows; r++) {
+        let tile = mapConfig.getTile(layer, c, r);
         if (tile !== 0) { // 0 => empty tile
           this.ctx.drawImage(
             this.tileAtlas, // image
@@ -108,6 +108,6 @@ var Map = {
 //
 
 window.onload = function () {
-    var context = document.getElementById('map').getContext('2d');
-    Map.run(context);
+    const context = document.getElementById('map').getContext('2d');
+    MapHandler.run(context);
 };
