@@ -10,7 +10,7 @@
     <div id="app">
       <h1>KwAIzy Genius</h1>
       <div class="game-container">
-        <div id="map" class="map"></div>
+        <canvas id="map" class="map" width="1088" height="640"></canvas>
         <div id="chat" class="chat">
           <div class="chat-login" id="chat-login">
             <form id="chat-login-form">
@@ -63,5 +63,6 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js" type="module"></script>
+    <script src="modules/map.js"></script>
   </body>
 </html>
