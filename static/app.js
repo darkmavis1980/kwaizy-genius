@@ -2,11 +2,10 @@
 import player from './modules/player.js';
 import User from './modules/user.js';
 import { eventDispatcher } from './modules/event.js';
-import { getCurrentChatName, emitName } from "./modules/utils.js";
+import { getCurrentChatName, emitName, emitPosition } from "./modules/utils.js";
 
 const users = [];
 const socket = io();
-
 window.socket = socket;
 document.getElementById('map').addEventListener('keydown', function (e) {
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) > -1) {
@@ -18,8 +17,26 @@ const chatLogin = document.getElementById('chat-login');
 const chatWindow = document.getElementById('chat-container');
 const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
+const questionField = document.getElementById('question');
+const regexGeniusQuestion = /\/genius\s.+/gm;
 
-player.set('socket', socket)
+player.set('socket', socket);
+
+player.setMoveHandler(() => {
+  let { value } = questionField;
+  if (player.genieHitCollision) {
+    chatForm.classList.add('player-ask-genie');
+    if (!regexGeniusQuestion.test(value) && value === '') {
+      questionField.value = `/genius ${value}`;
+    }
+  }
+
+  if (!player.genieHitCollision) {
+    chatForm.classList.remove('player-ask-genie');
+    questionField.value = value.replace('/genius', '').trim();
+  }
+});
+
 const getIndex = id => users.findIndex(user => user.id === id);
 socket.on('message', message => {
   eventDispatcher(socket, message);
@@ -52,6 +69,8 @@ socket.on('user-disconnected', id => {
 });
 
 socket.on('user-move', user => {
+  console.log('client user-move')
+  emitPosition(socket, user.coordinates);
   const index = getIndex(user.id);
   if (users[index]) {
     const instance = users[index].instance;
@@ -61,13 +80,11 @@ socket.on('user-move', user => {
 
 chatForm.onsubmit = (e) => {
   e.preventDefault();
-  const regex = /\/genius\s.+/gm;
 
-  const questionField = document.getElementById('question');
   let { value } = questionField;
   if (value.trim() !== '') {
     let askToGenius = false;
-    if (regex.test(value)) {
+    if (regexGeniusQuestion.test(value)) {
       askToGenius = true;
       console.log('asking to genius');
       value = value.replace(/\/genius\s/gm, '');
