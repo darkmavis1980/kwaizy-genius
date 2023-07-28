@@ -108,6 +108,6 @@ const MapHandler = {
 //
 
 window.onload = function () {
-    const context = document.getElementById('map').getContext('2d');
+    const context = document.getElementById('map-bg').getContext('2d');
     MapHandler.run(context);
 };
