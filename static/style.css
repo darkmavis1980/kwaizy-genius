@@ -160,9 +160,17 @@ button:focus-visible {
 
 .chat-message {
   text-align: left;
+
+  &:not(last-child) {
+    margin-bottom: 12px;
+  }
 }
 
 .username {
+  position: relative;
+  max-width: fit-content;
+  right: 8px;
+  margin: 0 0 -8px auto;
   background-color: #663300;
   color: #FFF8E1;
   padding: 2px 8px;
@@ -178,6 +186,9 @@ button:focus-visible {
 }
 
 .genius {
+  position: relative;
+  max-width: fit-content;
+  margin: 0 0 -8px 8px;
   background-color: #794681;
   color: #F7F7F8;
   padding: 2px 8px;
@@ -197,6 +208,8 @@ button:focus-visible {
 }
 
 .chat-label {
+  display: flex;
+  justify-content: center;
   background-color: #ffecb3;
   width: 202px;
   height: 48px;
@@ -208,7 +221,6 @@ button:focus-visible {
 
 .chat-input {
   all: unset;
-  text-align: left;
   margin: 0.5rem 0 0.5rem 0.5rem;
 
   &::placeholder {
