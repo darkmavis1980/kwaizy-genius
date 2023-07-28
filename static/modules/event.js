@@ -6,10 +6,10 @@ const createChatMessage = (payload, type = 'question') => {
   const msg = document.createElement('li');
   msg.classList.add('chat-message');
 
-  const span = document.createElement('span');
+  const span = document.createElement('p');
   const spanClass = type === 'question' ? 'username' : 'genius';
   span.classList.add(spanClass)
-  span.textContent = `From: ${payload.userName}`;
+  span.textContent = `${payload.userName}`;
 
   msg.appendChild(span);
   const paragraph = document.createElement('p');
@@ -47,4 +47,3 @@ export const eventDispatcher = (socket, message) => {
     eventsMap[action](message);
   }
 }
-
