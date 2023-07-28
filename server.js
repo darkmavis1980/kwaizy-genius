@@ -58,11 +58,15 @@ io.on('connection', (socket) => {
   })
 
   socket.on('user-move', coordinates => {
-    console.log('user move')
-    const index = getIndex(socket.id)
-    users[index].coordinates = coordinates
-    io.emit('user-move', {id: socket.id, coordinates})
-  })
+    if (coordinates) {
+      console.log('user move');
+      const index = getIndex(socket.id);
+      if (users[index]) {
+        users[index].coordinates = coordinates;
+        io.emit('user-move', {id: socket.id, coordinates});
+      }
+    }
+  });
 
   socket.on('disconnect', async () => {
     console.log('user disconnected', socket.id);

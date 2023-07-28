@@ -4,7 +4,7 @@ import User from './user.js'
 class Player extends User {
   constructor() {
     super()
-    this.element = canvas.create('div', {'class': ['player', 'user']})
+    this.element = canvas.create('div', { 'class': ['player', 'user', 'char'], id: 'current-player' })
     this.initMovement()
   }
 
@@ -28,9 +28,10 @@ class Player extends User {
         this.move('x', 1)
       }
       if (keycodes.includes(event.key)) {
+        // console.log(this.element.offsetLeft, this.element.offsetTop);
         this.socket.emit('user-move', this.coordinates)
       }
-    })
+    });
   }
 }
 
