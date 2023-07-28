@@ -158,7 +158,7 @@ button:focus-visible {
 }
 
 .chat-window {
-  height: calc(100% - 60px);
+  height: calc(100% - 48px);
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -205,16 +205,14 @@ button:focus-visible {
   background-color: #fde8af;
 }
 
-.chat-input-form {
-  height: 60px;
-}
-
 .chat-form {
   display: flex;
 }
 
 .chat-label {
   background-color: #ffecb3;
+  width: 202px;
+  height: 48px;
 }
 
 .chat-form.player-ask-genie {
@@ -223,7 +221,7 @@ button:focus-visible {
 
 .chat-input {
   all: unset;
-  margin-right: 0.5rem;
+  margin-right: 8px;
 
   &::placeholder {
     color: #FFB21A;
@@ -231,8 +229,11 @@ button:focus-visible {
 }
 
 .chat-button {
+  width: 48px;
+  height: 48px;
   background-color: #F2673A;
   border-radius: 0;
+  padding: 8px;
 }
 
 .player {
