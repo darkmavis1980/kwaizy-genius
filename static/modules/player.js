@@ -7,6 +7,7 @@ class Player extends User {
     this.element = canvas.create('div', { 'class': ['player', 'user', 'char'], id: 'current-player' });
     this.initMovement();
     this.moveHandler = undefined;
+    console.log(this.skin)
   }
 
   set(key, value) {
@@ -15,6 +16,10 @@ class Player extends User {
 
   initMovement() {
     const keycodes = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+    // TODO fix initial position
+    this.move('y', 0, 'ArrowDown');
+    this.move('x', 0, 'ArrowDown');
+
     window.addEventListener('keydown', event => {
       if (event.key === 'ArrowUp') { // up
         this.move('y', -1, event.key);

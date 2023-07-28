@@ -19,3 +19,13 @@ export const emitPosition = (socket, coodinates) => {
   }
   socket.emit('message', JSON.stringify(data));
 };
+
+export const emitSkin = (skin) => {
+  const data = {
+    action: 'setSkin',
+    payload: {
+      skin
+    }
+  }
+  socket.emit('message', JSON.stringify(data));
+};
