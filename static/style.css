@@ -94,7 +94,6 @@ button:focus-visible {
   height: 100%;
   content: ""; /* make canvas visible at all times */
   background-color: transparent;
-  border: 1px solid red;
   margin: 0 auto;
   position: absolute;
   top: 0;
