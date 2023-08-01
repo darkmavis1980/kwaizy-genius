@@ -10,6 +10,7 @@
       href="//fonts.googleapis.com/css?family=VT323"
     />
     <title>KwAIzy Genius</title>
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
   </head>
   <body>
     <div id="app">
@@ -24,7 +25,6 @@
           <div class="map-overlay"></div>
         </div>
         <div id="chat" class="chat">
-          
           <div class="chat-container" id="chat-container">
             <div class="chat-window" id="chat-window">
              <ul id="chat-log">
@@ -61,6 +61,11 @@
           <strong>Online players:</strong>
           <ul class="players-list" id="players-list"></ul>
         </div>
+        <audio controls autoplay loop preload="metadata">
+          <source src="music/bg.ogg" type="audio/ogg">
+          <source src="music/bg.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </div>
     <div class="overlay" id="game-overlay">

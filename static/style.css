@@ -380,8 +380,15 @@ button:focus-visible {
 .overlay-image-wrapper {
   max-width: 372px;
 }
-  
+
 .overlay-image {
   border-radius: 63px;
   max-width: 100%;
+}
+
+audio {
+  width: 250px;
+  height: 20px;
+  opacity: 30%;
+  margin-top: 15px;
 }
