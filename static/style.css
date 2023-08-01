@@ -346,7 +346,7 @@ button:focus-visible {
   border-radius: 40px;
   align-items: center;
 }
-  
+
 .overlay-content-bg {
   position: absolute;
   width: 100%;
@@ -386,9 +386,85 @@ button:focus-visible {
   max-width: 100%;
 }
 
-audio {
-  width: 250px;
-  height: 20px;
-  opacity: 30%;
-  margin-top: 15px;
+.text-ai {
+  color: #F2673A;
+}
+
+.play-music{
+  display: flex;
+  position:absolute;
+  top:0;
+  right:0;
+  margin: 15px;
+}
+
+.music-animation{
+  display: flex;
+  margin-right: 10px;
+  align-items: flex-end;
+  position: relative;
+  top: -5px;
+  &.on{
+    .bar{
+      animation: bar 1.2s infinite;
+    }
+    .bar2{
+      animation-delay: .1s;
+    }
+    .bar3{
+      animation-delay: .2s;
+    }
+    .bar4{
+      animation-delay: .3s;
+    }
+    .bar5{
+      animation-delay: .4s;
+    }
+  }
+}
+
+#toggle{
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color: #000;
+  cursor: pointer;
+}
+
+.music-toggle{
+  cursor: pointer;
+  font-size: 20px;
+  position:relative;
+  &:after{
+    content: "";
+    display: block;
+    height: 1px;
+    width: 0;
+    background-color: #000;
+    position: absolute;
+    transition: .2s;
+  }
+  &:hover:after{
+    width: 100%;
+  }
+}
+
+.bar{
+  width: 1px;
+  background-color: #000;
+  height: 2px;
+  display: block;
+  margin: 0 1px;
+}
+
+@keyframes bar{
+  0%{
+    height:4px;
+  }
+  50%{
+    height: 14px;
+  }
+  100%{
+    height: 4px;
+  }
 }

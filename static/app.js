@@ -21,14 +21,32 @@ const chatLoginForm = document.getElementById('chat-login-form');
 const chatForm = document.getElementById('chat-form');
 const questionField = document.getElementById('question');
 const genieContainer = document.getElementById('genie-container');
+const musicToogle = document.getElementById('toggle');
 
 const genie = canvas.create('div', {
   class: 'genie'
 });
+
+// music
+const music = document.getElementById("music");
+let isPlaying;
+
+music.volume = 0.1;
+
+music.onplaying = function() {
+  isPlaying = true;
+  document.getElementById("music-animation").classList.add('on')
+};
+
+music.onpause = function() {
+  isPlaying = false;
+  document.getElementById("music-animation").classList.remove('on')
+};
+// end music
+
 genieContainer.appendChild(genie);
 
 player.set('socket', socket);
-
 
 player.setMoveHandler(() => {
   let { value } = questionField;
@@ -123,6 +141,23 @@ chatLoginForm.onsubmit = (e) => {
     localStorage.setItem('name', value);
     emitName(socket, value);
     gameOverlay.classList.remove('active');
+  }
+}
+
+musicToogle.onclick = (e) => {
+  e.preventDefault();
+
+  if (isPlaying) {
+    music.pause()
+  } else {
+    music.play();
+  }
+
+  if (e.target.getAttribute("data-text-swap") == e.target.innerHTML) {
+    e.target.innerHTML = e.target.getAttribute("data-text-original");
+  } else {
+    e.target.setAttribute("data-text-original", e.target.innerHTML);
+    e.target.innerHTML = e.target.getAttribute("data-text-swap");
   }
 }
 

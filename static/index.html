@@ -12,8 +12,23 @@
     <title>KwAIzy Genius</title>
   </head>
   <body>
+    <div class="play-music">
+      <div id="music-animation" class="music-animation">
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="bar bar3"></span>
+        <span class="bar bar4"></span>
+        <span class="bar bar5"></span>
+      </div>
+      <div class="music-toggle"><a id="toggle" data-text-swap="music on" type="link">music off</a></div>
+    </div>
+    <audio id="music" loop="loop" autoplay loop preload="metadata">
+      <source src="music/bg.ogg" type="audio/ogg">
+      <source src="music/bg.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
     <div id="app">
-      <h1>KwAIzy Genius</h1>
+      <h1>Kw<span class="text-ai">AI</span>zy Genius</h1>
       <div class="game-container">
         <div class="map-container">
           <canvas id="map-bg" class="map-bg" width="1088" height="640"></canvas>
@@ -60,11 +75,6 @@
           <strong>Online players:</strong>
           <ul class="players-list" id="players-list"></ul>
         </div>
-        <audio controls autoplay loop preload="metadata">
-          <source src="music/bg.ogg" type="audio/ogg">
-          <source src="music/bg.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
       </div>
     </div>
     <div class="overlay" id="game-overlay">
